@@ -12,15 +12,30 @@
     }
 
     table th {
+        background-color: #326949;
+        /* Apply the color to table headers */
+        color: white;
+        /* Set text color to white for contrast */
         border: 1px solid #ccc;
     }
+
+    /* Optional: You can apply the color to the entire table border as well */
+    table {
+        border: 2px solid #326949;
+    }
+
+    /* Optional: Apply color to even rows for better readability */
+    table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    /* Optional: Apply color to odd rows */
+    table tbody tr:nth-child(odd) {
+        background-color: #e9f4e9;
+    }
 </style>
+
 <table>
-    <!-- <tr>
-        <td align="center">
-            <img src="{{ asset('images/header.png') }}" width="50%">
-        </td>
-    </tr> -->
     <tr>
         <td align="left">
             Perihal : {{ $judul }} <br>
@@ -42,20 +57,20 @@
     </thead>
     <tbody>
         @foreach ($cetak as $row)
-        <tr>
-            <td> {{ $loop->iteration }} </td>
-            <td> {{ $row->kategori->nama_kategori }} </td>
-            <td>
-                @if ($row->status == 1)
-                Publis
-                @elseif($row->status == 0)
-                Blok
-                @endif
-            </td>
-            <td> {{ $row->nama_produk }} </td>
-            <td> Rp. {{ number_format($row->harga, 0, ',', '.') }} </td>
-            <td> {{ $row->stok }} </td>
-        </tr>
+            <tr>
+                <td> {{ $loop->iteration }} </td>
+                <td> {{ $row->kategori->nama_kategori }} </td>
+                <td>
+                    @if ($row->status == 1)
+                        Publis
+                    @elseif($row->status == 0)
+                        Blok
+                    @endif
+                </td>
+                <td> {{ $row->nama_produk }} </td>
+                <td> Rp. {{ number_format($row->harga, 0, ',', '.') }} </td>
+                <td> {{ $row->stok }} </td>
+            </tr>
         @endforeach
     </tbody>
 </table>

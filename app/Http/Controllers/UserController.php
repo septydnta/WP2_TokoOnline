@@ -28,7 +28,7 @@ class UserController extends Controller
     {
         return view('backend.v_user.create', [
             'judul' => 'Tambah User',
-            ]);
+        ]);
     }
 
     /**
@@ -43,13 +43,13 @@ class UserController extends Controller
             'hp' => 'required|min:10|max:13',
             'password' => 'required|min:4|confirmed',
             'foto' => 'image|mimes:jpeg,jpg,png,gif|file|max:1024',
-            ], $messages = [
+        ], $messages = [
             'foto.image' => 'Format gambar gunakan file dengan ekstensi jpeg, jpg, png,
             atau gif.',
             'foto.max' => 'Ukuran file gambar Maksimal adalah 1024 KB.'
         ]);
         $validatedData['status'] = 0;
-            
+
         // menggunakan ImageHelper
         if ($request->file('foto')) {
             $file = $request->file('foto');
@@ -62,7 +62,7 @@ class UserController extends Controller
             // Simpan nama file asli di database
             $validatedData['foto'] = $originalFileName;
         }
-            
+
         // password kombinasi
         $password = $request->input('password');
         $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/';
@@ -165,7 +165,7 @@ class UserController extends Controller
             'judul' => 'Laporan Data User',
         ]);
     }
-    
+
     public function cetakUser(Request $request)
     {
         // Menambahkan aturan validasi
@@ -180,16 +180,16 @@ class UserController extends Controller
 
         $tanggalAwal = $request->input('tanggal_awal');
         $tanggalAkhir = $request->input('tanggal_akhir');
-        
+
         $query = User::whereBetween('created_at', [$tanggalAwal, $tanggalAkhir])
             ->orderBy('id', 'desc');
-        
-            $user = $query->get();
-            return view('backend.v_user.cetak', [
-                'judul' => 'Laporan User',
-                'tanggalAwal' => $tanggalAwal,
-                'tanggalAkhir' => $tanggalAkhir,
-                'cetak' => $user
+
+        $user = $query->get();
+        return view('backend.v_user.cetak', [
+            'judul' => 'Laporan User',
+            'tanggalAwal' => $tanggalAwal,
+            'tanggalAkhir' => $tanggalAkhir,
+            'cetak' => $user
         ]);
     }
 }

@@ -12,15 +12,25 @@
     }
 
     table th {
+        background-color: #326949;
+        color: white;
         border: 1px solid #ccc;
     }
+
+    table {
+        border: 2px solid #326949;
+    }
+
+    table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    table tbody tr:nth-child(odd) {
+        background-color: #e9f4e9;
+    }
 </style>
+
 <table>
-    <!-- <tr>
-        <td align="center">
-            <img src="{{ asset('images/header.png') }}" width="50%">
-        </td>
-    </tr> -->
     <tr>
         <td align="left">
             Perihal : {{ $judul }} <br>
@@ -41,25 +51,25 @@
     </thead>
     <tbody>
         @foreach ($cetak as $row)
-        <tr>
-            <td> {{ $loop->iteration }} </td>
-            <td> {{$row->nama}} </td>
-            <td> {{$row->email}} </td>
-            <td>
-                @if ($row->role == 1)
-                Super Admin
-                @elseif($row->role == 0)
-                Admin
-                @endif
-            </td>
-            <td>
-                @if ($row->status ==1)
-                Aktif
-                @elseif($row->status ==0)
-                NonAktif
-                @endif
-            </td>
-        </tr>
+            <tr>
+                <td> {{ $loop->iteration }} </td>
+                <td> {{ $row->nama }} </td>
+                <td> {{ $row->email }} </td>
+                <td>
+                    @if ($row->role == 1)
+                        Super Admin
+                    @elseif($row->role == 0)
+                        Admin
+                    @endif
+                </td>
+                <td>
+                    @if ($row->status == 1)
+                        Aktif
+                    @elseif($row->status == 0)
+                        NonAktif
+                    @endif
+                </td>
+            </tr>
         @endforeach
     </tbody>
 </table>
